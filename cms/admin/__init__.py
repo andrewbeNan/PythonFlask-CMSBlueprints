@@ -52,7 +52,7 @@ def create(type):
 
 @admin_bp.route("/edit/<id>", methods=["GET", "POST"])
 def edit(id):
-    content = Content.query.filter_by(id=id).first_or_404()
+    content = Content.query.first_or_404(id)
     type = Type.query.get(content.type_id)
     types = Type.query.all()
     if request.method == "POST":
@@ -62,7 +62,8 @@ def edit(id):
         content.body = request.form.get("body")
         content.updated_at = datetime.utcnow()
         error = None
-        if not request.form.get("title"):
+
+        if not request.form["title"]:
             error = "Title is required!"
 
         if error == None:
