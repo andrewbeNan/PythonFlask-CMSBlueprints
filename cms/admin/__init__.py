@@ -33,7 +33,7 @@ def create(type):
             elif not type_id:
                 error = "Type is required"
 
-            if not error:
+            if error==None:
                 content = Content(title=title, slug=slug, type_id=type_id, body=body)
                 db.session.add(content)
                 db.session.commit()
