@@ -37,13 +37,13 @@
         </div>
         <div class="field">
           <label class="label">Content</label>
-          <textarea name="body" class="textarea" value="{{ body|default('') }}">
+          <textarea name="body" class="textarea">{{ body|default('') }}</textarea>
           <div class="control">
           </div>
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <input type="submit" class="button is-link" value="Submit">Submit</button>
+            <input type="submit" class="button is-link" value="Submit">
           </div>
           <div class="control">
             <a href="{{ url_for('admin.content', type=type_name) }}" class="button is-text">Cancel</a>
