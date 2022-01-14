@@ -24,12 +24,12 @@
           <div class="menu">
             <p class="menu-label">Administration</p>
             <ul class="menu-list">
-              <li><a href="{{ url_for('content', type='page') }}">Pages</a></li>
-              <li><a href="{{ url_for('content', type='post') }}">Posts</a></li>
-              <li><a href="{{ url_for('content', type='partial') }}">Partials</a></li>
-              <li><a href="{{ url_for('content', type='template') }}">Templates</a></li>
-              <li><a href="{{ url_for('users') }}">Users</a></li>
-              <li><a href="{{ url_for('settings') }}">Settings</a></li>
+              <li><a href="{{ url_for('admin.content', type='page') }}">Pages</a></li>
+              <li><a href="{{ url_for('admin.content', type='post') }}">Posts</a></li>
+              <li><a href="{{ url_for('admin.content', type='partial') }}">Partials</a></li>
+              <li><a href="{{ url_for('admin.content', type='template') }}">Templates</a></li>
+              <li><a href="{{ url_for('admin.users') }}">Users</a></li>
+              <li><a href="{{ url_for('admin.settings') }}">Settings</a></li>
             </ul>
           </div>
         </div>
