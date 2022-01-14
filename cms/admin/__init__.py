@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, abort, render_template, request, redirect, url_for, flash
 from cms.admin.models import Type, Content, Setting, User, db
 
@@ -47,6 +48,38 @@ def create(type):
         )
     else:
         abort(404)
+
+
+@admin_bp.route("/edit/<id>", methods=["GET", "POST"])
+def edit(id):
+    content = Content.query.filter_by(id=id).first_or_404()
+    type = Type.query.get(content.type_id)
+    types = Type.query.all()
+    if request.method == "POST":
+        content.title = request.form.get("title")
+        content.slug = request.form.get("slug")
+        content.type_id = request.form.get("type_id")
+        content.body = request.form.get("body")
+        content.updated_at = datetime.utcnow()
+        error = None
+        if not content.title:
+            error = "Title is required!"
+
+        if error == None:
+            db.session.commit()
+            return redirect(url_for("admin.content", type=type.name))
+        flash(error)
+
+    return render_template(
+        "admin/content_form.html",
+        types=types,
+        type_name=type.name,
+        title="Edit",
+        item_title=content.title,
+        slug=content.slug,
+        type_id=content.type_id,
+        body=content.body,
+    )
 
 
 @admin_bp.route("/users")

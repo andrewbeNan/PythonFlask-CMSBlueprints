@@ -13,13 +13,13 @@
       <form method="POST">
         <div class="field">
           <label class="label">Title</label>
-          <input type="text" name="title" class="input">
+          <input type="text" name="title" class="input" value="{{ item_title|default('') }}">
           <div class="control">
           </div>
         </div>
         <div class="field">
           <label class="label">Slug</label>
-          <input type="text" name="slug" class="input">
+          <input type="text" name="slug" class="input" value="{{ slug|default('') }}">
           <div class="control">
           </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="field">
           <label class="label">Content</label>
-          <textarea name="body" class="textarea">
+          <textarea name="body" class="textarea" value="{{ body|default('') }}">
           <div class="control">
           </div>
         </div>
