@@ -1,7 +1,9 @@
 from flask import Blueprint, abort, render_template, request, redirect, url_for, flash
 from cms.admin.models import Type, Content, Setting, User, db
 
-admin_bp = Blueprint("admin", __name__, url_prefix="/admin", template_folder="templates")
+admin_bp = Blueprint(
+    "admin", __name__, url_prefix="/admin", template_folder="templates"
+)
 
 
 def requested_type(type):
@@ -33,11 +35,11 @@ def create(type):
             elif not type_id:
                 error = "Type is required"
 
-            if error==None:
+            if error == None:
                 content = Content(title=title, slug=slug, type_id=type_id, body=body)
                 db.session.add(content)
                 db.session.commit()
-                return redirect(url_for("admin.content"), type=type)
+                return redirect(url_for("admin.content", type=type))
             flash(error)
         types = Type.query.all()
         return render_template(
