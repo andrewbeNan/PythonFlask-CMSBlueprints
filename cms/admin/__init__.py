@@ -1,9 +1,7 @@
 from flask import Blueprint, abort, render_template
 from cms.admin.models import Type, Content, Setting, User
 
-admin_bp = Blueprint(
-    "admin", __name__, url_prefix="/admin", template_folder="templates"
-)
+admin_bp = Blueprint("admin", __name__, url_prefix="/admin", template_folder="templates")
 
 
 def requested_type(type):
