@@ -1,5 +1,5 @@
-from flask import Blueprint, abort, render_template
-from cms.admin.models import Type, Content, Setting, User
+from flask import Blueprint, abort, render_template, request, redirect, url_for, flash
+from cms.admin.models import Type, Content, Setting, User, db
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin", template_folder="templates")
 
@@ -19,9 +19,26 @@ def content(type):
         abort(404)
 
 
-@admin_bp.route("/create/<type>")
+@admin_bp.route("/create/<type>", methods=["GET", "POST"])
 def create(type):
     if requested_type(type):
+        if request.method == "POST":
+            title = request.form.get("title")
+            slug = request.form.get("slug")
+            type_id = request.form.get("type_id")
+            body = request.form.get("body")
+            error = None
+            if not title:
+                error = "Title is required!"
+            elif not type_id:
+                error = "Type is required"
+
+            if not error:
+                content = Content(title=title, slug=slug, type_id=type_id, body=body)
+                db.session.add(content)
+                db.session.commit()
+                return redirect(url_for("admin.content"), type)
+            flash(error)
         types = Type.query.all()
         return render_template(
             "admin/content_form.html", title="Create", types=types, type_name=type
