@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from cms.admin.models import Type, Content, db
+from cms.admin.models import Type, Content, Setting, User, db
 from cms.admin import admin_bp
 
 ## Application Configuration
