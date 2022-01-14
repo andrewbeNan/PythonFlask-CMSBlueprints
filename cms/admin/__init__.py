@@ -37,7 +37,7 @@ def create(type):
                 content = Content(title=title, slug=slug, type_id=type_id, body=body)
                 db.session.add(content)
                 db.session.commit()
-                return redirect(url_for("admin.content"), type)
+                return redirect(url_for("admin.content"), type=type)
             flash(error)
         types = Type.query.all()
         return render_template(
