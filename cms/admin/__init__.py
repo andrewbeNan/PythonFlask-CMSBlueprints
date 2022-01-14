@@ -52,7 +52,7 @@ def create(type):
 
 @admin_bp.route("/edit/<id>", methods=["GET", "POST"])
 def edit(id):
-    content = Content.query.first_or_404(id)
+    content = Content.query.get_or_404(id)
     type = Type.query.get(content.type_id)
     types = Type.query.all()
     if request.method == "POST":
