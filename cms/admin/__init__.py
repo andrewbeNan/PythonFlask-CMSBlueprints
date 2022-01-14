@@ -63,7 +63,7 @@ def edit(id):
         content.updated_at = datetime.utcnow()
         error = None
 
-        if not request.form["title"]:
+        if not request.form.get("title"):
             error = "Title is required!"
 
         if error == None:
